@@ -1,5 +1,9 @@
 package com.github.wesleyav.jornadamilhas.services;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -63,6 +67,23 @@ public class DepoimentoService {
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
 		}
+	}
+
+	@Transactional
+	public List<Depoimento> getDepoimentosAleatorios(int quantidade) {
+		List<Depoimento> depoimentos = depoimentoRepository.findAll();
+		List<Depoimento> depoimentosAleatorios = new ArrayList<>();
+
+		Random random = new Random();
+
+		while (depoimentosAleatorios.size() < quantidade && depoimentosAleatorios.size() < depoimentos.size()) {
+			int indiceAleatorio = random.nextInt(depoimentos.size());
+			Depoimento depoimento = depoimentos.get(indiceAleatorio);
+			if (!depoimentosAleatorios.contains(depoimento)) {
+				depoimentosAleatorios.add(depoimento);
+			}
+		}
+		return depoimentosAleatorios;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.github.wesleyav.jornadamilhas.controllers;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -72,4 +73,12 @@ public class DepoimentoController {
 		Depoimento depoimento = depoimentoService.update(id, obj);
 		return new ResponseEntity<>(depoimento, HttpStatus.OK);
 	}
+
+	@GetMapping(value = "/depoimentos-home", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Endpoint para exibir de forma randômica os depoimentos de 3 pessoas")
+	public ResponseEntity<List<Depoimento>> getDepoimentosHome() {
+		List<Depoimento> depoimentos = depoimentoService.getDepoimentosAleatorios(3);
+		return new ResponseEntity<>(depoimentos, HttpStatus.OK);
+	}
+
 }
