@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  api:
+    container_name: api-service
+    build:
+      context: .
+    ports:
+      - "8082:8082"
+    environment:
+      - SERVER_PORT=8082
+      - MYSQL_URL=jdbc:mysql://db/db_jornadamilhas
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://db:3306"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      # start_period: 30s
+  db:
+    container_name: db-service
+    image: mysql:8.0.31
+    environment:
+      MYSQL_ROOT_PASSWORD: asdf
+      MYSQL_DATABASE: db_jornadamilhas
+      MYSQL_USER: user
+      MYSQL_PASSWORD: asdf
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - mysql_config:/etc/mysql/conf.d
+volumes:
+  mysql_data:
+  mysql_config:
