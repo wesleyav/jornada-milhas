@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.github.wesleyav.jornadamilhas.services.exceptions.DestinoNotFoundException;
 import com.github.wesleyav.jornadamilhas.services.exceptions.ResourceEmptyException;
 import com.github.wesleyav.jornadamilhas.services.exceptions.ResourceNotFoundException;
 
@@ -25,9 +26,20 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
 				request.getRequestURI());
 		return ResponseEntity.status(status).body(standardError);
 	}
-	
+
 	@ExceptionHandler(ResourceEmptyException.class)
 	public ResponseEntity<StandardError> resourceIsEmpty(ResourceEmptyException e, HttpServletRequest request) {
+		String error = "Resource not found";
+		HttpStatus status = HttpStatus.NOT_FOUND;
+
+		StandardError standardError = new StandardError(Instant.now(), status.value(), error, e.getMessage(),
+				request.getRequestURI());
+		return ResponseEntity.status(status).body(standardError);
+	}
+
+	@ExceptionHandler(DestinoNotFoundException.class)
+	public ResponseEntity<StandardError> destinoNotFoundException(DestinoNotFoundException e,
+			HttpServletRequest request) {
 		String error = "Resource not found";
 		HttpStatus status = HttpStatus.NOT_FOUND;
 
