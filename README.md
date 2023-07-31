@@ -47,10 +47,46 @@ target
 ```bash
 # cria a imagem
 docker build --tag jornada-milhas:v1.0.0 .
+```
 
+## Docker Compose
+
+```bash
 # sobe o container
 docker-compose -f docker-compose-dev.yml up --build -d
 
 # remove o container
 docker-compose -f docker-compose-dev.yml down
 ```
+
+## Endpoints
+
+#### Depoimentos
+| Método HTTP | Prefixo | Endpoint          | Descrição                                 |
+| ----------- | ------- | ----------------- | ----------------------------------------- |
+| GET         | /api/v1 | /depoimentos      | Retorna uma lista paginada de depoimentos |
+| GET         | /api/v1 | /depoimentos/1    | Retorna o depoimento com o id 1           |
+| POST        | /api/v1 | /depoimentos      | Cria um depoimento                        |
+| PUT         | /api/v1 | /depoimentos/1    | Atualiza o depoimento com o id 1          |
+| DELETE      | /api/v1 | /depoimentos/1    | Remove o depoimento com o id 1            |
+| GET         | /api/v1 | /depoimentos-home | Remove 3 depoimentos de forma randômica   |
+
+#### Destinos
+| Método HTTP | Prefixo | Endpoint                  | Descrição                                             |
+| ----------- | ------- | ------------------------- | ----------------------------------------------------- |
+| GET         | /api/v1 | /destinos                 | Retorna uma lista paginada de destinos                |
+| GET         | /api/v1 | /destinos/1               | Retorna o destino com o id 1                          |
+| POST        | /api/v1 | /destinos                 | Cria um destino                                       |
+| PUT         | /api/v1 | /destinos/1               | Atualiza o destino com o id 1                         |
+| DELETE      | /api/v1 | /destinos/1               | Remove o destino com o id 1                           |
+| GET         | /api/v1 | /destinos-nome?nome=Paris | Retorna uma lista de destinos contendo a string Paris |
+
+Documentação interativa com o Swagger:
+No browser acesse http://localhost:8082/swagger-ui/index.html
+
+![](src/main/resources/docs/imgs/1.png)
+
+## Licença 
+
+The [MIT License]() (MIT)
+Copyright :copyright: 2023 - jornada-milhas
