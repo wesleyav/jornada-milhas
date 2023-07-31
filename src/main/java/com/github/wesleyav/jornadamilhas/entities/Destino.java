@@ -22,10 +22,19 @@ public class Destino implements Serializable {
 	Long id;
 
 	@Column(length = 45)
-	String imageUrl;
+	String foto1;
+
+	@Column(length = 45)
+	String foto2;
 
 	@Column(length = 255)
 	String nome;
+
+	@Column(length = 160)
+	String meta;
+
+	@Column(nullable = true, length = 255)
+	String textoDescritivo;
 
 	@Column(length = 45)
 	BigDecimal preco;
@@ -33,10 +42,14 @@ public class Destino implements Serializable {
 	public Destino() {
 	}
 
-	public Destino(Long id, String imageUrl, String nome, BigDecimal preco) {
+	public Destino(Long id, String foto1, String foto2, String nome, String meta, String textoDescritivo,
+			BigDecimal preco) {
 		this.id = id;
-		this.imageUrl = imageUrl;
+		this.foto1 = foto1;
+		this.foto2 = foto2;
 		this.nome = nome;
+		this.meta = meta;
+		this.textoDescritivo = textoDescritivo;
 		this.preco = preco;
 	}
 
@@ -48,12 +61,20 @@ public class Destino implements Serializable {
 		this.id = id;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public String getFoto1() {
+		return foto1;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setFoto1(String foto1) {
+		this.foto1 = foto1;
+	}
+
+	public String getFoto2() {
+		return foto2;
+	}
+
+	public void setFoto2(String foto2) {
+		this.foto2 = foto2;
 	}
 
 	public String getNome() {
@@ -62,6 +83,22 @@ public class Destino implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getMeta() {
+		return meta;
+	}
+
+	public void setMeta(String meta) {
+		this.meta = meta;
+	}
+
+	public String getTextoDescritivo() {
+		return textoDescritivo;
+	}
+
+	public void setTextoDescritivo(String textoDescritivo) {
+		this.textoDescritivo = textoDescritivo;
 	}
 
 	public BigDecimal getPreco() {
@@ -91,7 +128,8 @@ public class Destino implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Destino [id=" + id + ", imageUrl=" + imageUrl + ", nome=" + nome + ", preco=" + preco + "]";
+		return "Destino [id=" + id + ", foto1=" + foto1 + ", foto2=" + foto2 + ", nome=" + nome + ", meta=" + meta
+				+ ", textoDescritivo=" + textoDescritivo + ", preco=" + preco + "]";
 	}
 
 }

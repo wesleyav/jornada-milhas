@@ -67,8 +67,11 @@ public class DestinoService {
 
 		try {
 			Destino destino = destinoRepository.getReferenceById(id);
-			destino.setImageUrl(obj.getImageUrl());
+			destino.setFoto1(obj.getFoto1());
+			destino.setFoto2(obj.getFoto2());
 			destino.setNome(obj.getNome());
+			destino.setMeta(obj.getMeta());
+			destino.setTextoDescritivo(obj.getTextoDescritivo());
 			destino.setPreco(obj.getPreco());
 			return destinoRepository.save(destino);
 		} catch (EntityNotFoundException e) {

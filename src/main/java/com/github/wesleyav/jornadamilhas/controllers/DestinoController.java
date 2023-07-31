@@ -3,8 +3,6 @@ package com.github.wesleyav.jornadamilhas.controllers;
 import java.net.URI;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,8 +29,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Destino")
 public class DestinoController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(DestinoController.class);
-
 	private DestinoService destinoService;
 
 	public DestinoController(DestinoService destinoService) {
@@ -43,7 +39,6 @@ public class DestinoController {
 	@Operation(summary = "Endpoint para listar de forma paginada todos os destinos")
 	public ResponseEntity<Page<Destino>> findAll(@RequestParam(defaultValue = "0") Integer pageNumber,
 			@RequestParam(defaultValue = "10") Integer pageSize) {
-		LOGGER.info("Endpoint de findAll");
 		Page<Destino> destinoPage = destinoService.findAll(pageNumber, pageSize);
 
 		return new ResponseEntity<>(destinoPage, HttpStatus.OK);
@@ -59,7 +54,6 @@ public class DestinoController {
 	@GetMapping(value = "/destinos-nome{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "Endpoint para buscar um destinos por nome")
 	public ResponseEntity<List<Destino>> findByNomeContainingIgnoreCase(@RequestParam String nome) {
-		LOGGER.info("Endpoint de nome");
 		List<Destino> destinos = destinoService.findByNomeContainingIgnoreCase(nome);
 		return new ResponseEntity<>(destinos, HttpStatus.OK);
 	}
