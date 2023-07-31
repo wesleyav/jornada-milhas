@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.github.wesleyav.jornadamilhas.entities.Destino;
+import com.github.wesleyav.jornadamilhas.entities.dto.DestinoResponseDTO;
 import com.github.wesleyav.jornadamilhas.services.DestinoService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -46,9 +47,10 @@ public class DestinoController {
 
 	@GetMapping(value = "/destinos/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "Endpoint para listar um destinos por id")
-	public ResponseEntity<Destino> findById(@PathVariable Long id) {
+	public ResponseEntity<DestinoResponseDTO> findById(@PathVariable Long id) {
 		Destino destino = destinoService.findById(id);
-		return new ResponseEntity<>(destino, HttpStatus.OK);
+		DestinoResponseDTO destinoResponseDTO = new DestinoResponseDTO(destino);
+		return new ResponseEntity<>(destinoResponseDTO, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/destinos-nome{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
