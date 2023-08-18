@@ -1,10 +1,29 @@
-![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
-
 # Alura Challenge Back-End 7
 
 ## Descrição
 
 Este é um projeto desenvolvido durante o Alura Challenge Backend 7ª edição. O projeto consiste no desenvolvimento de uma API que será integrada ao frontend. O objetivo é disponibilizar informações e recursos do banco de dados relacionados a possíveis destinos de viagem, exibindo fotos e um texto chamativo que instigue o usuário a querer visitar aquele destino.
+
+## Requisitos
+
+Os requisitos foram definidos e disponibilizados utilizando a ferramenta Trello.
+
+* Semana 1
+  * CRUD de Depoimentos
+  * Endpoint de depoimento
+  * Configurar o CORS
+  * Testes
+* Semana 2
+  * CRUD de Destinos
+  * Endpoint de busca de destinos
+  * Teste
+* Semana 3
+  * Nova versão de Destino
+  * Endpoint de destinos pelo ID
+
+## Diagrama de classes
+
+![](src/main/resources/docs/imgs/diagrama-de-classes.png)
 
 ### Tecnologias utilizadas
 
@@ -23,31 +42,7 @@ Para esta aplicação foram criados dois perfis:
 * test - para subir a aplicação em memória utilizando o H2
 * dev - para subir a aplicação em container utilizando Docker
 
-## Criando o Dockerfile
 
-```bash
-FROM eclipse-temurin:17-jdk-jammy
-WORKDIR /app
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:resolve
-COPY src ./src
-EXPOSE 8082
-CMD [ "./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=dev"]
-```
-
-## Criando o .dockerignore
-
-```bash
-target
-```
-
-## Build da imagem Docker
-
-```bash
-# cria a imagem
-docker build --tag jornada-milhas:v1.0.0 .
-```
 
 ## Docker Compose
 
